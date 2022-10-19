@@ -1,10 +1,35 @@
-const express = require('express');
-const myHelper = require('../util/helper')
-const underscore = require('underscore')
 
+const express = require('express');
+//const myHelper = require('../util/helper')
+//const underscore = require('underscore')
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
+router.get('/sol1',function (req,res){
+   const arr=[1,2,3,5,6,7];
+   let n=arr.length+1;
+   var sum=n*(n+1)/2;
+   let missingnum=0;
+   for(let i=0;i<arr.length;i++)
+   {
+         missingnum =missingnum+arr[i];
+         s=(sum-missingnum)
+   }
+   res.send({data : s});
+})
+
+router.get('/sol2',function (req,res){
+   const arr2=[34,35,37,38];
+   let n=arr2.length+1;
+   var summ=n*(arr2[0]+arr2[arr2.length-1])/2;
+   let missing=0;
+   for(let i=0;i<arr2.length;i++)
+   {
+         missing=missing+arr2[i];
+         v=(summ-missing)
+   }
+   res.send({data : v});
+});
+/*router.get('/test-me', function (req, res) {
     myHelper.printDate()
     myHelper.getCurrentMonth()
     myHelper.getCohortData()
@@ -106,7 +131,6 @@ router.get("/films/:filmId", function(req, res){
 
        //if there is no match give an error response
        res.send("The film id doesn't match any movie")
-})
+})*/
 
 module.exports = router;
-// adding this comment for no reason
