@@ -1,7 +1,57 @@
+ //create an array of objects and tell who can vote.
+
+
+
 const express = require('express');
 const router = express.Router();
 
-router.get('/students/:name', function(req, res) {
+
+let persons= [
+   {
+   name: "PK",
+   age: 10,
+   votingStatus: false
+},
+{
+   name: "SK",
+   age: 20,
+   votingStatus: false
+},
+{
+   name: "AA",
+   age: 70,
+   votingStatus: false
+},
+{
+   name: "SC",
+   age: 5,
+   votingStatus: false
+},
+{
+   name: "HO",
+   age: 40,
+   votingStatus: false
+}
+]
+
+router.post("/voting",function(req,res)
+{
+  let votingage=req.query.votingage;
+  let x=[];
+  persons.forEach((person)=>
+  {
+    if(person.age> votingage)
+    {
+        person.votingStatus=true;
+        x.push(person)
+    }
+  })
+
+
+ return  res.send({x: x})
+});
+
+/*router.get('/students/:name', function(req, res) {
     let studentName = req.params.name
     console.log(studentName)
     res.send(studentName)
@@ -10,7 +60,6 @@ router.get('/students/:name', function(req, res) {
 router.get("/random" , function(req, res) {
     res.send("hi there")
 })
-
 
 router.get("/test-api" , function(req, res) {
     res.send("hi FunctionUp")
@@ -157,7 +206,7 @@ router.post( "/post-query-2", function (req, res){
         if ( myArr[i] > input )     finalArr.push( myArr[i])
     }
     res.send( {data: finalArr , status: true})
-})
+})*/
 
 
 module.exports = router;
