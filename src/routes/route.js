@@ -66,7 +66,7 @@ module.exports = router;
 
 
 
-/*router.get('/students/:name', function(req, res) {
+/*router.get('/students:name', function(req, res) {
     let studentName = req.params.name
     console.log(studentName)
     res.send(studentName)
@@ -132,4 +132,4 @@ router.post("/test-post-4", function(req, res) {
     let arr= [ 12, "functionup"]
     let ele= req.body.element
     arr.push(ele)
-    res.send(  { msg: arr , status: true }  )
+    res.send(  { msg: arr , status: true }  )*/
