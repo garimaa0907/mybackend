@@ -1,14 +1,34 @@
 const { count } = require("console")
-const BookModel= require("../models/bookModel")
+const bookModel = require("../models/bookModel")
+//const BookModel= require("../models/bookModel")
 
-const createBook= async function (req, res) {
+const createBook= async function (req, res) {   //to create books data 
     let data= req.body
-
-    let savedData= await BookModel.create(data)
+    let savedData= await bookModel.create(data)
     res.send({msg: savedData})
 }
 
-const getBooksData= async function (req, res) {
+const bookList= async function (req, res) {
+    let allbooks = await bookModel.find().select({bookName: 1, authorName: 1, _id: 0})
+    res.send({ msg: allbooks})
+}
+ 
+const getBooksinYear =async function(req, res) {
+    let books= await bookModel.find({year: {$eq: 2010}})
+    res.send({msg : books})
+}
+ 
+const getParticularBooks = async function( req,res)
+{
+    let pbooks= await bookModel.find({year: {$eq:2008}})
+    res.send({msg : pbooks})
+}
+
+ const getRandomBooks = async function( req,res)
+ {
+    let rbooks= await bookModel.find({$or:[{stockavailable : {$eq:true}},{totalpages : {$gt : 500}}]})
+    return res.send({msg: rbooks})
+ }
 
     // let allBooks= await BookModel.find( ).count() // COUNT
 
@@ -65,7 +85,7 @@ const getBooksData= async function (req, res) {
     
     // ASYNC AWAIT
     
-    let a= 2+4
+    /*let a= 2+4
     a= a + 10
     console.log(a)
     let allBooks= await BookModel.find( )  //normally this is an asynchronous call..but await makes it synchronous
@@ -78,8 +98,11 @@ const getBooksData= async function (req, res) {
     b= b+ 10
     console.log(b)
     res.send({msg: allBooks})
-}
+}*/
 
 
 module.exports.createBook= createBook
-module.exports.getBooksData= getBooksData
+module.exports.bookList= bookList 
+module.exports.getBooksinYear= getBooksinYear
+module.exports.getParticularBooks= getParticularBooks 
+module.exports.getRandomBooks= getRandomBooks
