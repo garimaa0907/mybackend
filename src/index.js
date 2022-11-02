@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
 const { default: mongoose } = require('mongoose');
+const { logg } = require('./middlewares/commonMiddlewares.js');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -22,6 +24,8 @@ app.use (
   );
 
 app.use('/', route);
+ 
+app.use(logg)
 
 
 app.listen(process.env.PORT || 3000, function () {

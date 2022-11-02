@@ -12,14 +12,13 @@ const basicCode= async function(req, res) {
     res.send({ msg: "This is coming from controller (handler)"})
     }
 
+const code =async function(req,res)
+{
+    res.send({msg :"check terminal window"})
+}
 
 
-
-
-
-
-
-
+module.exports.code = code
 
 
 

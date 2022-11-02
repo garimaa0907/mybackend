@@ -13,8 +13,9 @@ router.get("/test-me", function (req, res) {
 
 
 router.post("/createBook", BookController.createBook  )
+  
 
-
+router.get("/basic" , UserController.code)
 
 
 // router.post("/createUser", UserController.createUser  )
@@ -57,6 +58,5 @@ router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.
 // router.get("/basicRoute4", commonMW.mid1, commonMW.mid4, UserController.basicCode4)
 
 
-
-
+router.get("/hitapi",)
 module.exports = router;

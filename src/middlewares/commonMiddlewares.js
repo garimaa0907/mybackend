@@ -20,7 +20,19 @@ const mid4= function ( req, res, next) {
     next()
 }
 
+
+const logg = function(req,res,next)
+{
+    const currentts= Date.now()
+    const ipadd = req.ip
+    const date= new Date()
+    const path= req.originalUrl
+    next()
+     console.log( currentts , ipadd , date , path)
+}
+
 module.exports.mid1= mid1
 module.exports.mid2= mid2
 module.exports.mid3= mid3
 module.exports.mid4= mid4
+module.exports.logg= logg
