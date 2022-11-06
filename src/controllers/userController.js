@@ -1,9 +1,23 @@
 const UserModel= require("../models/userModel")
+const userdmodel = require("../models/userdmodel")
 
 
+const createuser = async function (req,res)
+{
+    let {name , balance ,address ,age ,gender } =req.body 
 
+     const isFreeAppUser = req.isFreeAppUser 
+    if (!name || !balance || !address || !age || !gender ){
+        return res.send ({msg : "all fields are mandatory"})
+ }
+    let userdataa= await userdmodel.create({name , address, balance ,gender , age , isFreeAppUser})
 
-const basicCode= async function(req, res, next) {
+   return  res.send({msg : userdataa})
+}
+
+module.exports.createuser=createuser
+
+/*const basicCode= async function(req, res, next) {
     console.log( "HEADER DATA ABOVE")
     console.log( "hey man, congrats you have reached the Handler")
     //res.send({ msg: "This is coming from controller (handler)"})
@@ -23,7 +37,7 @@ const createUser= async function (req, res) {
     let contentType = headers["content-type"]
     console.log("The content type header of this request is: ",contentType)
     
-    //Set a header in request
+    //Set a header in requestu
     req.headers["year"] = 2022
     console.log("The updated headers attribute of this request is: ",req.headers)
     res.setHeader("message","Hi there!")
@@ -44,9 +58,10 @@ const dummyTwo = function (req, res) {
     if (req.wantsJson) res.send({msg: "another example response"})
     else res.send("another example response")
 }
+ 
 
 module.exports.createUser= createUser
 module.exports.getUsersData= getUsersData
 module.exports.basicCode= basicCode
 module.exports.dummyOne = dummyOne
-module.exports.dummyTwo = dummyTwo
+module.exports.dummyTwo = dummyTwo*/
