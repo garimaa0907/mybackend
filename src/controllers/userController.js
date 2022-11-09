@@ -2,53 +2,77 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
 const createUser = async function (req, res) {
+  try{
   let data = req.body;
   let savedData = await userModel.create(data);
-  res.send({ msg: savedData });
-};
+  res.status(201).send({ msg: savedData }); }
+  catch(error)
+  {
+    res.status(500).send({ msg : err.message});
+  }}
 
 const loginUser = async function (req, res) {
+  try{
   let userName = req.body.emailId;
   let password = req.body.password;
 
   let user = await userModel.findOne({ emailId: userName, password: password });
   if (!user)
-    return res.send({ status: false, msg: "username or the password is not corerct",});
+    return res.status(404).send({ status: false, msg: "username or the password is not corerct",});
 
 let token = jwt.sign({userId: user._id.toString(),batch:"lithium",  organisation: "FUnctionUp",}, "my-sceret-key");
   res.setHeader("x-auth-token", token);
-  res.send({ status: true, data: token });
-};
+  res.status(201).send({ status: true, data: token });}
+  catch(err)
+  {
+    res.status(500).send({ msg : err.message})
+ 
+}};
 
 const getUserData = async function (req, res) { 
+  try{
   let userId = req.params.userId;
   let userDetails = await userModel.findById(userId);
   if (!userDetails)
-    return res.send({ status: false, msg: "No such user exists" });
+    return res.status(404).send({ status: false, msg: "No such user exists" });
 
-  res.send({ status: true, data: userDetails });
-};
+  res.status(200).send({ status: true, data: userDetails });}
+  catch(err)
+  {
+    res.status(500).send({ msg : err.message})
+  }
+}
 
 const updateUser = async function (req, res) {
+  try{
   let userId = req.params.userId;
   let user = await userModel.findById(userId);
   if (!user) {
-    return res.send("No such user exists");
+    return res.status(404).send("No such user exists");
   }
   let userData = req.body;
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, {$set :userData},{new: true});
-  res.send({ status: updatedUser, data: updatedUser });
+  res.status(201).send({ status: updatedUser, data: updatedUser });}
+  catch(err)
+  {
+    res.status(500).send({ msg : err.message})
+  }
 };
 
 const deleteUser = async function (req, res) {
+  try{
   let userId = req.params.userId;
   let user = await userModel.findById(userId);
   if (!user) {
-    return res.send("No such user exists");
+    return res.status(404).send("No such user exists");
   }
   let userData = req.body;
   let deleteUser = await userModel.findOneAndUpdate({ _id: userId }, {$set :userData},{new: true});
-  res.send({ status: deleteUser, data: deleteUser });
+  res.status(200).send({ status: deleteUser, data: deleteUser });}
+  catch(err)
+  {
+    res.status(500).send({ msg : err.message})
+  }
 };
 
 /*const postMessage = async function (req, res) {
