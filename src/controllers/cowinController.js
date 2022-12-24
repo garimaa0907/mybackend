@@ -1,6 +1,6 @@
 let axios = require("axios")
 
-
+//question 1 of vaccination sessions
 let getbyDistricts = async function (req,res)
 {
     try{
@@ -19,6 +19,8 @@ let getbyDistricts = async function (req,res)
     }
 } 
 
+
+//question 2 of temperature
  let getWeatherOfLondon = async function (req,res)
  {
     try{
@@ -32,8 +34,7 @@ let getbyDistricts = async function (req,res)
         let data = result.data;
     
         res.status(200).send({msg : data})
-
-    }
+     }
     catch(err){
         res.status(500).send({msg : err.message})
     }   
@@ -53,13 +54,13 @@ let getbyDistricts = async function (req,res)
         let m=data.main.temp;
         res.status(200).send({msg : m})
 
-    }
- 
-    catch(err){
+    }catch(err){
         res.status(500).send({msg : err.message})
-    }   
- }
+    }   }
 
+
+
+//question 3 of meme creation 
 let getMeme = async function(req,res){
     try{
             let template_id=req.query.template_id
@@ -84,4 +85,4 @@ let getMeme = async function(req,res){
  module.exports.getbyDistricts= getbyDistricts
 module.exports.getWeatherOfLondon=getWeatherOfLondon
 module.exports.getMeme=getMeme
-module.exports.getWeatherOf=getWeatherOf
+module.exports.getWeatherOf=getWeatherOf 
